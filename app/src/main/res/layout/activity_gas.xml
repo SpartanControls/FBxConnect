@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GasActivity">
+
+    <Button
+        android:id="@+id/btnGenerate2"
+        style="@style/BottomButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="goToReportActivity"
+        android:text="@string/generate_and_view_report"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtGas"
+        style="@style/TitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/gas_composition_report"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtStationEFM"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/select_a_station"
+        app:layout_constraintEnd_toStartOf="@+id/txtMeter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGas" />
+
+    <TextView
+        android:id="@+id/txtMeter"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="34dp"
+        android:text="@string/select_a_meter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtStationEFM"
+        app:layout_constraintTop_toTopOf="@+id/txtStationEFM" />
+
+    <RadioGroup
+        android:id="@+id/rgStation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@+id/rbStationAll"
+        app:layout_constraintEnd_toEndOf="@+id/txtStationEFM"
+        app:layout_constraintStart_toStartOf="@+id/txtStationEFM"
+        app:layout_constraintTop_toBottomOf="@+id/txtStationEFM">
+
+        <RadioButton
+            android:id="@+id/rbStationAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/all_stations" />
+
+        <RadioButton
+            android:id="@+id/rbStation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/station_1" />
+
+        <RadioButton
+            android:id="@+id/rbStation2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/station_2" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rgMeter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:checkedButton="@+id/rbMeterAll"
+        app:layout_constraintEnd_toEndOf="@+id/txtMeter"
+        app:layout_constraintStart_toStartOf="@+id/txtMeter"
+        app:layout_constraintTop_toBottomOf="@+id/txtMeter">
+
+        <RadioButton
+            android:id="@+id/rbMeterAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/all_meters" />
+
+        <RadioButton
+            android:id="@+id/rbMeter1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/meter_1" />
+
+        <RadioButton
+            android:id="@+id/rbMeter2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/meter_2" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnClose"
+        style="@style/BottomButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="goToMainActivity"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

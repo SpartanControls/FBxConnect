@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EFMActivity">
+
+    <TextView
+        android:id="@+id/txtEFM"
+        style="@style/MainButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/efm_report"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnClose"
+        style="@style/BottomButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="goToMainActivity"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnGenerate"
+        style="@style/BottomButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="goToReportAction"
+        android:text="@string/generate_and_view_report"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtStationEFM"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/select_a_station"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEFM" />
+
+    <TextView
+        android:id="@+id/txtMeter"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/select_a_meter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtStationEFM" />
+
+    <RadioGroup
+        android:id="@+id/rgStation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@+id/rbStationAll"
+        app:layout_constraintEnd_toEndOf="@+id/txtStationEFM"
+        app:layout_constraintStart_toStartOf="@+id/txtStationEFM"
+        app:layout_constraintTop_toBottomOf="@+id/txtStationEFM">
+
+        <RadioButton
+            android:id="@+id/rbStationAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/all_stations" />
+
+        <RadioButton
+            android:id="@+id/rbStation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/station_1" />
+
+        <RadioButton
+            android:id="@+id/rbStation2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/station_2" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rgMeter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:checkedButton="@+id/rbMeterAll"
+        app:layout_constraintEnd_toEndOf="@+id/txtMeter"
+        app:layout_constraintStart_toStartOf="@+id/txtMeter"
+        app:layout_constraintTop_toBottomOf="@+id/txtMeter">
+
+        <RadioButton
+            android:id="@+id/rbMeterAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/all_meters" />
+
+        <RadioButton
+            android:id="@+id/rbMeter1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/meter_1" />
+
+        <RadioButton
+            android:id="@+id/rbMeter2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/meter_2" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtHistory"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/history_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgStation" />
+
+    <TextView
+        android:id="@+id/txtCollection"
+        style="@style/EFMTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/collection_period"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtHistory" />
+
+    <CheckBox
+        android:id="@+id/cbDaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:checked="false"
+        android:text="@string/daily"
+        app:layout_constraintEnd_toStartOf="@+id/cbHourly"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/txtHistory"
+        app:layout_constraintTop_toBottomOf="@+id/txtHistory" />
+
+    <CheckBox
+        android:id="@+id/cbHourly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:checked="false"
+        android:text="@string/hourly"
+        app:layout_constraintEnd_toEndOf="@+id/txtHistory"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cbDaily"
+        app:layout_constraintTop_toTopOf="@+id/cbDaily" />
+
+    <CheckBox
+        android:id="@+id/cbAlarms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/alarms"
+        app:layout_constraintStart_toStartOf="@+id/cbDaily"
+        app:layout_constraintTop_toBottomOf="@+id/cbDaily" />
+
+    <CheckBox
+        android:id="@+id/cbEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/events"
+        app:layout_constraintStart_toStartOf="@+id/cbHourly"
+        app:layout_constraintTop_toTopOf="@+id/cbAlarms" />
+
+    <TextView
+        android:id="@+id/txtFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/from"
+        app:layout_constraintEnd_toStartOf="@+id/btnFromDate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cbHourly"
+        app:layout_constraintStart_toStartOf="@+id/txtCollection"
+        app:layout_constraintTop_toTopOf="@+id/btnFromDate" />
+
+    <TextView
+        android:id="@+id/txtTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/to"
+        app:layout_constraintEnd_toStartOf="@+id/btnToDate"
+        app:layout_constraintTop_toTopOf="@+id/btnToDate" />
+
+    <Button
+        android:id="@+id/btnFromDate"
+        style="@style/TimeButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/datefrom"
+        android:onClick="showDatePickerDialog"
+        android:text="@string/pick_date"
+        app:layout_constraintEnd_toStartOf="@+id/btnFromTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtFrom"
+        app:layout_constraintTop_toBottomOf="@+id/txtCollection" />
+
+    <Button
+        android:id="@+id/btnFromTime"
+        style="@style/TimeButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/timefrom"
+        android:onClick="showTimePickerDialog"
+        android:text="@string/pick_time"
+        app:layout_constraintEnd_toEndOf="@+id/txtCollection"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnFromDate"
+        app:layout_constraintTop_toTopOf="@+id/btnFromDate" />
+
+    <Button
+        android:id="@+id/btnToDate"
+        style="@style/TimeButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/dateto"
+        android:onClick="showDatePickerDialog"
+        android:text="@string/pick_date"
+        app:layout_constraintEnd_toStartOf="@+id/btnFromTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnFromDate"
+        app:layout_constraintTop_toBottomOf="@+id/btnFromDate" />
+
+    <Button
+        android:id="@+id/btnToTime"
+        style="@style/TimeButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/timeto"
+        android:onClick="showTimePickerDialog"
+        android:text="@string/pick_time"
+        app:layout_constraintEnd_toEndOf="@+id/btnFromTime"
+        app:layout_constraintStart_toStartOf="@+id/btnFromTime"
+        app:layout_constraintTop_toTopOf="@+id/btnToDate" />
+</android.support.constraint.ConstraintLayout>
