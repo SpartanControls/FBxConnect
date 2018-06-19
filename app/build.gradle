@@ -9,6 +9,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                // Uncomment the line below to load the JAVA bindings dependency for opendnp3
+                // THis crashed the build at the moment :/
+                //arguments "-DDNP3_JAVA=ON"
+            }
+        }
     }
     buildTypes {
         release {

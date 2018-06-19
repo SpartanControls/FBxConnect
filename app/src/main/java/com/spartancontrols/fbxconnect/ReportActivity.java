@@ -19,6 +19,12 @@ import java.util.GregorianCalendar;
 
 public class ReportActivity extends AppCompatActivity {
 
+    static {
+        // This crashed the program when trying to load
+        //System.loadLibrary("opendnp3java");
+
+    }
+
     // Store all of the params passed by the user from the previous screen
     private Calendar dateFrom;
     private Calendar dateTo;
