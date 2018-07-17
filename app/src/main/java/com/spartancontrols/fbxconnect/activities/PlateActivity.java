@@ -1,4 +1,4 @@
-package com.spartancontrols.fbxconnect;
+package com.spartancontrols.fbxconnect.activities;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.spartancontrols.InputFilterMinMax;
+import com.spartancontrols.fbxconnect.R;
 
 public class PlateActivity extends AppCompatActivity implements View.OnClickListener{
 

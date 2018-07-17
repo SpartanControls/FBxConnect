@@ -1,4 +1,4 @@
-package com.spartancontrols.fbxconnect;
+package com.spartancontrols.fbxconnect.activities;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -20,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.spartancontrols.fbxconnect.R;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

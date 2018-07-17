@@ -1,4 +1,4 @@
-package com.spartancontrols.fbxconnect;
+package com.spartancontrols.fbxconnect.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.opencsv.CSVWriter;
+import com.spartancontrols.fbxconnect.R;
 
 import java.io.File;
 import java.io.FileWriter;

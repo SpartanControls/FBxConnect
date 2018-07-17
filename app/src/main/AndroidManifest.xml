@@ -12,17 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EFMActivity" />
-        <activity android:name=".GasActivity" />
-        <activity android:name=".ReportActivity" />
-        <activity android:name=".PlateActivity"></activity>
+        <activity android:name=".activities.EFMActivity" />
+        <activity android:name=".activities.GasActivity" />
+        <activity android:name=".activities.ReportActivity" />
+        <activity android:name=".activities.PlateActivity"></activity>
     </application>
 
 </manifest>
