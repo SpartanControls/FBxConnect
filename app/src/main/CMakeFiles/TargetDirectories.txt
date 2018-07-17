@@ -1,0 +1,12 @@
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/install/strip.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/install/local.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/list_install_components.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/rebuild_cache.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/edit_cache.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/opendnp3.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/openpal.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/asiopal.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/asiodnp3.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/opendnp3java.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/install.dir
+/home/pierce/AndroidStudioProjects/FBxConnect/app/src/main/CMakeFiles/format.dir

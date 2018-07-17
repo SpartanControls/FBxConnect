@@ -5,7 +5,7 @@ android {
     defaultConfig {
         publishNonDefault true
         applicationId "com.spartancontrols.fbxconnect"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -13,11 +13,29 @@ android {
 
         externalNativeBuild {
             cmake {
-                // Uncomment the line below to load the JAVA bindings dependency for opendnp3
-                // This crashed the build at the moment :/
-                //arguments "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\\opendnp3","-DDNP3_JAVA=ON"
-                //arguments "-DDNP3_JAVA=ON"
+/*                arguments "-DANDROID_ABI=arm64-v8a",
+                        "-DJAVA_DIR=/usr/lib/jvm/java-10-oracle/bin/",
+                        "-DJAVA_AWT_LIBRARY=/usr/lib/jvm/java-10-oracle/lib/libjawt.so",
+                        "-DJAVA_JVM_LIBRARY=/usr/lib/jvm/java-10-oracle/lib/server/libjvm.so",
+                        "-DJAVA_INCLUDE_PATH=JAVA_INCLUDE_PATH=/usr/lib/jvm/java-10-oracle/include",
+                        "-DJAVA_INCLUDE_PATH2=/usr/lib/jvm/java-10-oracle/include/linux",
+                        "-DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-10-oracle/include",
+                        "-DDNP3_JAVA=ON"
+*/
+
+                arguments "-DANDROID_ABI=arm64-v8a",
+                        "-DJAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64",
+                        //"-DJAVA_DIR=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/",
+                        "-DJAVA_AWT_LIBRARY=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/amd64/libjawt.so",
+                        "-DJAVA_JVM_LIBRARY=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/amd64/server/libjvm.so",
+                        "-DJAVA_INCLUDE_PATH=JAVA_INCLUDE_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include",
+                        "-DJAVA_INCLUDE_PATH2=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include/linux",
+                        "-DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include",
+                        "-DDNP3_JAVA=ON"
             }
+        }
+        ndk {
+            abiFilters 'arm64-v8a'
         }
     }
     buildTypes {
@@ -28,18 +46,39 @@ android {
     }
     externalNativeBuild {
         cmake {
-            //path '../dnp3/CMakeLists.txt'
+            path 'src/main/CMakeLists.txt'
         }
     }
-    buildToolsVersion '28.0.0'
+
+    sourceSets {
+        main {
+            //jniLibs.srcDirs = ['libs']
+        }
+    }
+    splits {
+        abi {
+            //enable true
+            //reset()
+            //include 'x86', 'armeabi-v7a'
+            //universalApk true
+        }
+    }
+    buildToolsVersion '28.0.1'
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //compile "com.automatak.dnp3:opendnp3-bindings:${opendnp3.version}"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    //implementation project(path: ':libs')
+    //implementation "com.automatak.dnp3:opendnp3-bindings:2.2.1-SNAPSHOT"
     implementation files('libs/opencsv-4.1.jar')
 }
