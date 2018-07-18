@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.opencsv.CSVWriter;
+import com.spartancontrols.fbxconnect.Connect;
 import com.spartancontrols.fbxconnect.R;
 
 import java.io.File;
@@ -57,6 +58,13 @@ public class ReportActivity extends AppCompatActivity {
         } else {
             readIntent();
         }
+
+        try {
+            Connect connect = new Connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     protected void onNewIntent(Intent intent) {

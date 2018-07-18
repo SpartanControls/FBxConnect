@@ -15,6 +15,7 @@
         <module>bindings</module>
         <module>example</module>
         <module>codegen</module>
+        <module>com</module>
     </modules>
 
     <properties>
@@ -96,7 +97,7 @@
                         <!--<include>**/*.java</include>-->
                         <include>cpp/*.cpp</include>
                         <include>cpp/*.hpp</include>
-                    </includes>                    
+                    </includes>
                 </configuration>
                 <executions>
                     <execution>
