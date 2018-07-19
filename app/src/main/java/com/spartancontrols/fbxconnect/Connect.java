@@ -3,15 +3,19 @@ package com.spartancontrols.fbxconnect;
 import com.automatak.dnp3.*;
 import com.automatak.dnp3.enums.CommandStatus;
 import com.automatak.dnp3.enums.ControlCode;
+import com.automatak.dnp3.enums.ServerAcceptMode;
 import com.automatak.dnp3.impl.DNP3ManagerFactory;
 import com.automatak.dnp3.mock.DefaultMasterApplication;
+import com.automatak.dnp3.mock.DefaultOutstationApplication;
 import com.automatak.dnp3.mock.PrintingChannelListener;
 import com.automatak.dnp3.mock.PrintingLogHandler;
 import com.automatak.dnp3.mock.PrintingSOEHandler;
+import com.automatak.dnp3.mock.SuccessCommandHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Example master than can be run against the example outstation
@@ -65,13 +69,15 @@ public class Connect {
 
         System.out.println("DNP3 IS SWAGGGGGGGGGGGG");
 
+        //TimeUnit.SECONDS.sleep(20);
+
         // all this cruft just to read a line of text in Java. Oh the humanity.
-        InputStreamReader converter = new InputStreamReader(System.in);
-        BufferedReader in = new BufferedReader(converter);
-        String line = in.readLine();
-        System.out.println("GENERAL KENOBI, YOU ARE A BOLD ONE"+line);
+//        InputStreamReader converter = new InputStreamReader(System.in);
+//        BufferedReader in = new BufferedReader(converter);
+//        System.out.println("HELLO THERE!!!!!!!");
 //
-//        while (true) {
+//        int x = 0;
+//        while (x<60) {
 //            System.out.println("Enter something to issue a command or type <quit> to exit");
 //            String line = in.readLine();
 //            switch(line)
@@ -92,7 +98,10 @@ public class Connect {
 //                    System.out.println("Unknown command: " + line);
 //                    break;
 //            }
+//            TimeUnit.SECONDS.sleep(1);
+//            x+=1;
 //        }
+//        System.out.println("GENERAL KENOBI, YOU ARE A BOLD ONE");
     }
 
 }
