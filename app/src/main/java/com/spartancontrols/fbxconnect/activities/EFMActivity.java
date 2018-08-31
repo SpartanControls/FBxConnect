@@ -83,45 +83,20 @@ public class EFMActivity extends AppCompatActivity
 
         // Add listener to Select a Station radiogroup
         RadioGroup radioStation = findViewById(R.id.rgStation);
-        radioStation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedID) {
-                stationSelection(checkedID);
-            }
-        });
+        radioStation.setOnCheckedChangeListener((group, checkedID) -> stationSelection(checkedID));
 
         // Add listener to toggle boolean when any of the history checkboxes are pressed
         CheckBox checkBox = findViewById(R.id.cbDaily);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                dailyToggle(isChecked);
-            }
-        });
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> dailyToggle(isChecked));
 
         checkBox = findViewById(R.id.cbHourly);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                hourlyToggle(isChecked);
-            }
-        });
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> hourlyToggle(isChecked));
 
         checkBox = findViewById(R.id.cbAlarms);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                alarmsToggle(isChecked);
-            }
-        });
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> alarmsToggle(isChecked));
 
         checkBox = findViewById(R.id.cbEvents);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                eventsToggle(isChecked);
-            }
-        });
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> eventsToggle(isChecked));
     }
 
     /**
@@ -131,7 +106,7 @@ public class EFMActivity extends AppCompatActivity
      */
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
@@ -142,6 +117,7 @@ public class EFMActivity extends AppCompatActivity
      * @param view - current view
      */
     public void goToReportAction(View view) {
+        // Current date and time on the phone
         Calendar cal = new GregorianCalendar();
         // Checks if at least one of Daily or Hourly has been selected
         // Need one of theses to send a request for data from the FB1100/1200
@@ -250,6 +226,7 @@ public class EFMActivity extends AppCompatActivity
 
     /**
      * Class used to get and display the time picked in the frame picker
+     * Not sure how all of this works :P
      */
     public static class TimePickerFragment extends DialogFragment {
         @NonNull
@@ -271,6 +248,11 @@ public class EFMActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Class used to get and display the date picker in the frame picker
+     * when the user selects a one of the two buttons to change a calendar date
+     * Not sure how all of this works :p
+     */
     public static class DatePickerFragment extends DialogFragment {
         @NonNull
         @Override
@@ -300,7 +282,7 @@ public class EFMActivity extends AppCompatActivity
     }
 
     /**
-     * Sets the date and time of the buttons to the date and time
+     * Sets the current phone date and time to the 4 buttons used
      * to when the Activity is opened
      */
     private void setDefaultDateTime() {
@@ -319,14 +301,13 @@ public class EFMActivity extends AppCompatActivity
 
     /**
      * Changes the selected station and toggles the possible meters that can be pressed
-     *
      * @param checkedID - int ID of selected station in radioGroup
      */
     private void stationSelection(int checkedID) {
         RadioButton radioButton;
-        // When All stations is selected
-        // Disable meters 1 and 2 and toggle All meters on
         switch (checkedID) {
+            // When All stations is selected
+            // Disable meters 1 and 2 and toggle All meters on
             case R.id.rbStationAll:
                 selectedStation = "stationAll";
                 radioButton = findViewById(R.id.rbMeterAll);
@@ -337,6 +318,8 @@ public class EFMActivity extends AppCompatActivity
                 radioButton = findViewById(R.id.rbMeter2);
                 radioButton.setEnabled(false);
                 break;
+            // When Station 1 is selected
+            // Disable All meters and meter 2, enable meter 1
             case R.id.rbStation1:
                 selectedStation = "station1";
                 radioButton = findViewById(R.id.rbMeterAll);
@@ -347,6 +330,8 @@ public class EFMActivity extends AppCompatActivity
                 radioButton = findViewById(R.id.rbMeter2);
                 radioButton.setEnabled(false);
                 break;
+            // When Station 2 is selected
+            // Disable All meters and meter 1, enable meter 2
             default:
                 selectedStation = "station2";
                 radioButton = findViewById(R.id.rbMeterAll);
@@ -382,18 +367,18 @@ public class EFMActivity extends AppCompatActivity
     }
 
     /**
-     * Compare to calendar objects
-     *
+     * Compare two calendar objects
+     * See if the first calendar date is before or after the second one
      * @param from - first Calendar
      * @param to   - second Calendar
      * @return - boolean
-     * true: if first is less than second
-     * false: if first is equal to or greater than second
+     *      true: if first is less than second
+     *      false: if first is equal to or greater than second
      */
     private boolean compareCalendar(Calendar from, Calendar to) {
+        // Error handling
         if (from == null || to == null)
             return false;
-
         int comp = from.compareTo(to);
         return comp < 0;
     }
@@ -412,7 +397,7 @@ public class EFMActivity extends AppCompatActivity
     }
 
     /**
-     * Format the Calendar time into user readable 12 hour format
+     * Format the Calendar time into String 12 hour format
      *
      * @param cal - Calendar to get the time from
      * @return - String format: hour:minute AM/PM
@@ -434,7 +419,7 @@ public class EFMActivity extends AppCompatActivity
     }
 
     /**
-     * Format the Calendar date into user readable day/month/year format
+     * Format the Calendar date into String day/month/year format
      * @param cal - Calendar to grab date from
      * @return - String format: day/month/year
      *             E.g: 25/1/2008,  9/4/2018
