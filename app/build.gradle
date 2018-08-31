@@ -13,29 +13,15 @@ android {
 
         externalNativeBuild {
             cmake {
-/*                arguments "-DANDROID_ABI=arm64-v8a",
-                        "-DJAVA_DIR=/usr/lib/jvm/java-10-oracle/bin/",
-                        "-DJAVA_AWT_LIBRARY=/usr/lib/jvm/java-10-oracle/lib/libjawt.so",
-                        "-DJAVA_JVM_LIBRARY=/usr/lib/jvm/java-10-oracle/lib/server/libjvm.so",
-                        "-DJAVA_INCLUDE_PATH=JAVA_INCLUDE_PATH=/usr/lib/jvm/java-10-oracle/include",
-                        "-DJAVA_INCLUDE_PATH2=/usr/lib/jvm/java-10-oracle/include/linux",
-                        "-DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-10-oracle/include",
-                        "-DDNP3_JAVA=ON"
-*/
-
-                arguments "-DANDROID_ABI=arm64-v8a",
-                        "-DJAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64",
-                        //"-DJAVA_DIR=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/",
+                arguments "-DJAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64",
                         "-DJAVA_AWT_LIBRARY=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/amd64/libjawt.so",
                         "-DJAVA_JVM_LIBRARY=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/amd64/server/libjvm.so",
                         "-DJAVA_INCLUDE_PATH=JAVA_INCLUDE_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include",
                         "-DJAVA_INCLUDE_PATH2=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include/linux",
                         "-DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/include",
                         "-DDNP3_JAVA=ON"
+                        //"-DJAVA_DIR=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/",
             }
-        }
-        ndk {
-            abiFilters 'arm64-v8a'
         }
     }
     buildTypes {

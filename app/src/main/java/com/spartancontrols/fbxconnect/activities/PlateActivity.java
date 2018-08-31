@@ -17,6 +17,8 @@ import com.spartancontrols.fbxconnect.R;
 
 public class PlateActivity extends AppCompatActivity implements View.OnClickListener{
 
+    static {System.loadLibrary("opendnp3java");}
+
     Button button;
 
     ConstraintLayout cl;
@@ -306,7 +308,7 @@ public class PlateActivity extends AppCompatActivity implements View.OnClickList
      */
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
     }

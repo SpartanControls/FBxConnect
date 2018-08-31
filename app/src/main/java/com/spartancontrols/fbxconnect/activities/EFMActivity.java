@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -28,6 +29,8 @@ import java.util.GregorianCalendar;
 
 public class EFMActivity extends AppCompatActivity
         implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+
+    static {System.loadLibrary("opendnp3java");}
 
     private Button button;
     private Integer id;
@@ -106,9 +109,10 @@ public class EFMActivity extends AppCompatActivity
      */
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
+        //NavUtils.navigateUpFromSameTask(this);
     }
 
     /**

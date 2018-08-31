@@ -21,10 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EFMActivity" />
-        <activity android:name=".activities.GasActivity" />
+        <activity android:name=".activities.EFMActivity"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
+        <activity android:name=".activities.GasActivity"
+            android:label="GasActivity"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
         <activity android:name=".activities.ReportActivity" />
-        <activity android:name=".activities.PlateActivity"></activity>
+        <activity android:name=".activities.PlateActivity"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
     </application>
 
 </manifest>

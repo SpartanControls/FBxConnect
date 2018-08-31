@@ -1,35 +1,29 @@
 package com.spartancontrols.fbxconnect;
 
 import com.automatak.dnp3.*;
-import com.automatak.dnp3.enums.CommandStatus;
-import com.automatak.dnp3.enums.ControlCode;
-import com.automatak.dnp3.enums.ServerAcceptMode;
 import com.automatak.dnp3.impl.DNP3ManagerFactory;
 import com.automatak.dnp3.mock.DefaultMasterApplication;
-import com.automatak.dnp3.mock.DefaultOutstationApplication;
 import com.automatak.dnp3.mock.PrintingChannelListener;
 import com.automatak.dnp3.mock.PrintingLogHandler;
 import com.automatak.dnp3.mock.PrintingSOEHandler;
-import com.automatak.dnp3.mock.SuccessCommandHandler;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
-/**
- * Example master than can be run against the example outstation
- */
 public class Connect {
 
-    public Connect () throws Exception {
+    public Connect (){}
 
-        // create the root class with a thread pool size of 1
-        DNP3Manager manager = DNP3ManagerFactory.createManager(1, PrintingLogHandler.getInstance());
-
+    /**
+     * Call this method to create a DNP3Manager
+     * Connects to the FB1100/FB12000
+     * @return DNP3Manager
+     */
+    public DNP3Manager connectToMaster(){
+        DNP3Manager manager=null;
         try {
+            manager = DNP3ManagerFactory.createManager(1, PrintingLogHandler.getInstance());
             System.out.println("RUNNING THE DNP3");
-            run(manager);
+            manager = run(manager);
             System.out.println("STOPPED THE DNP3");
         }
         catch(Exception ex)
@@ -37,14 +31,13 @@ public class Connect {
             System.out.println("Exception: " + ex.getMessage());
         }
         finally {
-            // This call is needed b/c the thread-pool will stop the application from exiting
-            // and the finalizer isn't guaranteed to run b/c the GC might not be collected during main() exit
-            manager.shutdown();
+            //manager.shutdown();
+            //System.out.println("SHUTDOWN THE DNP3");
         }
+        return manager;
     }
 
-    static void run(DNP3Manager manager) throws Exception
-    {
+    private static DNP3Manager run(DNP3Manager manager) throws Exception {
         // Create a tcp channel class that will connect to the loopback
         Channel channel = manager.addTCPClient(
                 "client",
@@ -65,43 +58,14 @@ public class Connect {
         // do an integrity scan once per minute
         master.addPeriodicScan(Duration.ofSeconds(2), Header.getIntegrity());
 
+        // Turn it on
         master.enable();
 
-        System.out.println("DNP3 IS SWAGGGGGGGGGGGG");
-
-        //TimeUnit.SECONDS.sleep(20);
-
-        // all this cruft just to read a line of text in Java. Oh the humanity.
-//        InputStreamReader converter = new InputStreamReader(System.in);
-//        BufferedReader in = new BufferedReader(converter);
-//        System.out.println("HELLO THERE!!!!!!!");
-//
-//        int x = 0;
-//        while (x<60) {
-//            System.out.println("Enter something to issue a command or type <quit> to exit");
-//            String line = in.readLine();
-//            switch(line)
-//            {
-//                case("quit"):
-//                    return;
-//                case("crob"):
-//                    ControlRelayOutputBlock crob = new ControlRelayOutputBlock(ControlCode.LATCH_ON, (short) 1, 100, 100, CommandStatus.SUCCESS);
-//                    master.selectAndOperateCROB(crob, 0).thenAccept(
-//                            //asynchronously print the result of the command operation
-//                            (CommandTaskResult result) -> System.out.println(result)
-//                    );
-//                    break;
-//                case("scan"):
-//                    master.scan(Header.getEventClasses());
-//                    break;
-//                default:
-//                    System.out.println("Unknown command: " + line);
-//                    break;
-//            }
-//            TimeUnit.SECONDS.sleep(1);
-//            x+=1;
-//        }
-//        System.out.println("GENERAL KENOBI, YOU ARE A BOLD ONE");
+        System.out.println("Before Scan");
+        master.scan(Header.getEventClasses());
+        System.out.println("After Scan");
+        
+        // Return the connected manager
+        return manager;
     }
-
 }

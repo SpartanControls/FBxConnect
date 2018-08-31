@@ -11,6 +11,8 @@ import com.spartancontrols.fbxconnect.R;
 
 public class GasActivity extends AppCompatActivity {
 
+    static {System.loadLibrary("opendnp3java");}
+
     // Current station the user has selected
     private String selectedStation;
 
@@ -47,7 +49,7 @@ public class GasActivity extends AppCompatActivity {
      */
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
     }
