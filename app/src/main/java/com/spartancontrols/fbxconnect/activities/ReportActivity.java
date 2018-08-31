@@ -7,9 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-
 import com.opencsv.CSVWriter;
-import com.spartancontrols.fbxconnect.Connect;
 import com.spartancontrols.fbxconnect.R;
 
 import java.io.File;
@@ -22,7 +20,6 @@ import java.util.GregorianCalendar;
 public class ReportActivity extends AppCompatActivity {
 
     static {
-        // This crashed the program when trying to load
         System.loadLibrary("opendnp3java");
     }
 
@@ -37,48 +34,13 @@ public class ReportActivity extends AppCompatActivity {
 
     private Intent intent;
 
-    private boolean extrasClearedOut;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_report);
-
-        if (savedInstanceState != null && savedInstanceState.getBoolean("extras_cleared_out", false)) {
-            extrasClearedOut = true;
-        }
         intent = getIntent();
-        if (extrasClearedOut) {
-            TextView txt = findViewById(R.id.txtReport);
-            String temp = "Error: This page should only be visible by generating a report from either EFM or Gas Composition";
-            txt.setText(temp);
-        } else {
-            readIntent();
-        }
-
-        try {
-            Connect connect = new Connect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        readIntent();
     }
-
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        if (extrasClearedOut) {
-            TextView txt = findViewById(R.id.txtReport);
-            String temp = "Error: This page should only be visible by generating a report from either EFM or Gas Composition";
-            txt.setText(temp);
-        } else {
-            readIntent();
-        }
-    }
-
 
     /**
      * Chooses the correct layout depending on what Activity the user came from
@@ -86,49 +48,64 @@ public class ReportActivity extends AppCompatActivity {
      * Displays the necessary data the user passed to the screen
      */
     private void readIntent() {
-        String report = intent.getStringExtra("report");
-        switch (report) {
-            case "gas": {
-                ConstraintLayout cl = this.findViewById(R.id.layoutGas);
-                cl.setVisibility(ConstraintLayout.VISIBLE);
-                setGasReport(intent);
-                break;
+        try {
+            String report = intent.getStringExtra("report");
+            switch (report) {
+                case "gas": {
+                    ConstraintLayout cl = this.findViewById(R.id.layoutGas);
+                    cl.setVisibility(ConstraintLayout.VISIBLE);
+                    setGasReport(intent);
+                    break;
+                }
+                case "efm": {
+                    ConstraintLayout cl = this.findViewById(R.id.layoutEFM);
+                    cl.setVisibility(ConstraintLayout.VISIBLE);
+                    setEFMReport(intent);
+                    break;
+                }
+                // Used if the user somehow got to this Activity from neither of the above ones
+                default:
+                    TextView txt = findViewById(R.id.txtReport);
+                    String temp = "Error: This page should only be visible by generating a report from either EFM or Gas Composition";
+                    txt.setText(temp);
+                    break;
             }
-            case "efm": {
-                ConstraintLayout cl = this.findViewById(R.id.layoutEFM);
-                cl.setVisibility(ConstraintLayout.VISIBLE);
-                setEFMReport(intent);
-                break;
-            }
-            // Used if the user somehow got to this Activity from neither of the above ones
-            default:
-                TextView txt = findViewById(R.id.txtReport);
-                String temp = "Error: This page should only be visible by generating a report from either EFM or Gas Composition";
-                txt.setText(temp);
-                break;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
     }
 
+    /**
+     * @param name - file name to be generated
+     * @param type - folder to be placed in (Gas or EFM)
+     * @param data - string of all of the data to be stored in the file
+     */
     private void generateCSV(String name, String type, String data) {
         try {
+            // Find the directory for Documents on the phone
             File directory = new File(Environment.getExternalStorageDirectory().getPath() + "/Documents/" + type);
+            // If the directory was found
             if (directory.exists()) {
                 System.out.println("CSV File location all ready created: " + directory.getAbsolutePath());
             } else {
+                // If not found try to make the Documents directory
                 directory.mkdir();
                 System.out.println("CSV File location being created: " + directory.getAbsolutePath());
             }
-            File test = new File(directory, name + ".csv");
-            CSVWriter writer = new CSVWriter(new FileWriter(test), ',', ' ');
+            // Create a new File with a .csv extension
+            File file = new File(directory, name + ".csv");
+            // Create a new CSV file from the file that was created
+            CSVWriter writer = new CSVWriter(new FileWriter(file), ',', ' ');
+            // Create an array of the data that was passed
             String[] entries = data.split("#"); // array of your values
+            // Write all of the data to the new file
             writer.writeNext(entries);
+            // CLose out of the file
             writer.close();
         } catch (IOException e) {
             System.out.println("CSV ERROR: " + e.getMessage());
             System.out.println("CSV Attempting to save in Downloads folder");
-
+            // If the function could not save to the Documents folder, tries to do the same in the downloads
             try {
                 File directory = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/" + type);
                 if (directory.exists()) {
@@ -144,6 +121,7 @@ public class ReportActivity extends AppCompatActivity {
                 writer.close();
             } catch (IOException r) {
                 System.out.println("CSV ERROR: " + r.getMessage());
+                System.out.println("CSV could not save to Downloads or Documents folder");
             }
         }
     }
