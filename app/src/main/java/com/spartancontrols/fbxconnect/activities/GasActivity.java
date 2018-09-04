@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.automatak.dnp3.DNP3Manager;
+import com.automatak.dnp3.Master;
+import com.spartancontrols.fbxconnect.Globals;
 import com.spartancontrols.fbxconnect.R;
 
 public class GasActivity extends AppCompatActivity {
@@ -16,16 +19,24 @@ public class GasActivity extends AppCompatActivity {
     // Current station the user has selected
     private String selectedStation;
 
+    private DNP3Manager manager;
+    private Master master;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gas);
 
+        // Get the DNP3Manager and Master from the Global variables class
+        Globals g = (Globals)getApplication();
+        manager = g.getDNP3Manager();
+        master = g.getMaster();
+
         // Set default selected station
         selectedStation = "stationAll";
 
-        // Disable Meter 1 ad n2 buttons to toggle until the correct Station has been selected
+        // Disable Meter 1 and 2 buttons to toggle until the correct Station has been selected
         RadioButton rb = findViewById(R.id.rbMeter1);
         rb.setEnabled(false);
 
@@ -34,12 +45,9 @@ public class GasActivity extends AppCompatActivity {
 
         // Add function for when radioGroup Button is selected
         RadioGroup radioStation = findViewById(R.id.rgStation);
-        radioStation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedID) {
-                stationSelection(checkedID);
-            }
-        });
+        radioStation.setOnCheckedChangeListener((group, checkedID) -> stationSelection(checkedID));
+
+
     }
 
     /**

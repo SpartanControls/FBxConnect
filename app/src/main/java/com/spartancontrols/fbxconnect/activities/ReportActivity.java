@@ -7,7 +7,11 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.automatak.dnp3.DNP3Manager;
+import com.automatak.dnp3.Master;
 import com.opencsv.CSVWriter;
+import com.spartancontrols.fbxconnect.Globals;
 import com.spartancontrols.fbxconnect.R;
 
 import java.io.File;
@@ -32,12 +36,22 @@ public class ReportActivity extends AppCompatActivity {
     private boolean alarms;
     private boolean events;
 
+    private DNP3Manager manager;
+    private Master master;
+
+
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+
+        // Get the DNP3Manager and Master from the Global variables class
+        Globals g = (Globals)getApplication();
+        manager = g.getDNP3Manager();
+        master = g.getMaster();
+
         intent = getIntent();
         readIntent();
     }

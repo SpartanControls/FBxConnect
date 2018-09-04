@@ -22,6 +22,9 @@ import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.automatak.dnp3.DNP3Manager;
+import com.automatak.dnp3.Master;
+import com.spartancontrols.fbxconnect.Globals;
 import com.spartancontrols.fbxconnect.R;
 
 import java.util.Calendar;
@@ -55,10 +58,18 @@ public class EFMActivity extends AppCompatActivity
     private boolean alarms;
     private boolean events;
 
+    private DNP3Manager manager;
+    private Master master;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_efm);
+
+        // Get the DNP3Manager and Master from the Global variables class
+        Globals g = (Globals)getApplication();
+        manager = g.getDNP3Manager();
+        master = g.getMaster();
 
         // Generate new default calendars and set them to the current date and time
         dateTo = new GregorianCalendar();

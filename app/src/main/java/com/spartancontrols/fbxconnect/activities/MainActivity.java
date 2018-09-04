@@ -23,6 +23,7 @@ import com.automatak.dnp3.mock.DefaultMasterApplication;
 import com.automatak.dnp3.mock.PrintingChannelListener;
 import com.automatak.dnp3.mock.PrintingLogHandler;
 import com.automatak.dnp3.mock.PrintingSOEHandler;
+import com.spartancontrols.fbxconnect.Globals;
 import com.spartancontrols.fbxconnect.R;
 
 import java.time.Duration;
@@ -43,7 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
     private Outstation outstation;
 
+    public MainActivity() {
+        connectToMaster();
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        verifyStoragePermissions(this);
+
+        System.out.println("HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    }
 
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
@@ -57,21 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
-    }
-
-    public MainActivity() {
-
-        connectToMaster();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        verifyStoragePermissions(this);
-
     }
 
     public void goToEFMActivity(View view) {
@@ -89,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Connect the phone to the FB unit using DNP3
+     */
     public void connectToMaster(){
         manager=null;
         try {
@@ -101,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
         {
             System.out.println("Exception: " + ex.getMessage());
         }
-        finally {
-            //manager.shutdown();
-            System.out.println("DNP3 Connection Finished");
-        }
-
 //        private Header(byte group, byte variation, QualifierCode qualifier, int count, int start, int stop)
 
 //        byte group = 0x01;
@@ -175,5 +171,20 @@ public class MainActivity extends AppCompatActivity {
         master.enable();
 
         master.scan(Header.getEventClasses());
+
+
+        // Store the new connection in the global class
+        // SO thy can be accessed from any other activity or class
+        Globals g = (Globals)getApplication();
+        g.setDNP3Manager(manager);
+        g.setMaster(master);
+    }
+
+    public DNP3Manager getManager(){
+        return manager;
+    }
+
+    public Master getMaster(){
+        return master;
     }
 }

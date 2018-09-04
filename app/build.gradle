@@ -61,10 +61,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    //compile "com.automatak.dnp3:opendnp3-bindings:${opendnp3.version}"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    //implementation project(path: ':libs')
-    //implementation "com.automatak.dnp3:opendnp3-bindings:2.2.1-SNAPSHOT"
     implementation files('libs/opencsv-4.1.jar')
 }

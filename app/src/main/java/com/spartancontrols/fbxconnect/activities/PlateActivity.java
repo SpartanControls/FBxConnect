@@ -12,7 +12,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.automatak.dnp3.DNP3Manager;
+import com.automatak.dnp3.Master;
 import com.spartancontrols.InputFilterMinMax;
+import com.spartancontrols.fbxconnect.Globals;
 import com.spartancontrols.fbxconnect.R;
 
 public class PlateActivity extends AppCompatActivity implements View.OnClickListener{
@@ -42,10 +45,18 @@ public class PlateActivity extends AppCompatActivity implements View.OnClickList
     // to said layout with the previous button
     private String toDone;
 
+    private DNP3Manager manager;
+    private Master master;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plate);
+
+        // Get the DNP3Manager and Master from the Global variables class
+        Globals g = (Globals)getApplication();
+        manager = g.getDNP3Manager();
+        master = g.getMaster();
 
         // Start the Activity on the Choose Meter layout
         position = 0;
